@@ -30,7 +30,7 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/menil/jobgitops:latest
+      image: ghcr.io/menil/gitemployed:latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -45,16 +45,18 @@ jobs:
       - name: Run Issue Responder
         run: |
           set -e
-          python -m jobgitops.cli.respond --event-path "$GITHUB_EVENT_PATH"
+          python -m gitemployed.cli.respond --event-path "$GITHUB_EVENT_PATH"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_PAT: ${{ secrets.GH_PAT }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           LLM_PROVIDER: ${{ vars.LLM_PROVIDER }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
           OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL }}
+          CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
           BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
           JINA_API_KEY: ${{ secrets.JINA_API_KEY }}
