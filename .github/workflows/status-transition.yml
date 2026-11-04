@@ -27,10 +27,10 @@ jobs:
       (github.event.action == 'labeled' && contains(fromJSON('["triage-pending","ready-to-apply","applied","in-loop","offer-received","rejected","triage-mismatched"]'), github.event.label.name))
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/menil/gitemployed:latest
+      image: ghcr.io/menil/gitemployed:slim
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Run Status Transition Script
         run: python -m gitemployed.cli.status_transition --event-path "$GITHUB_EVENT_PATH"

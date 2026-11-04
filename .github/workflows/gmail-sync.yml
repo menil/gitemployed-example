@@ -20,7 +20,7 @@ jobs:
       enabled: ${{ steps.check-enabled.outputs.enabled }}
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           sparse-checkout: |
             config/settings.yaml
@@ -45,10 +45,10 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/menil/gitemployed:latest
+      image: ghcr.io/menil/gitemployed:slim
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set Badge (Running)
         if: github.repository != vars.TEMPLATE_REPO
